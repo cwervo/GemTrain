@@ -1,3 +1,4 @@
 *.meta
 .*.swp
 .*.swo
+.DS_Store
