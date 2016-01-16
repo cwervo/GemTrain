@@ -7,10 +7,12 @@ public class Board : MonoBehaviour {
 	GameObject tileFolder;
 	List<List<Tile>> tiles;
 
-	int num_tiles_h = 10;
-	int num_tiles_w = 18;
+	int num_tiles_h;
+	int num_tiles_w;
 
-	void Start () {
+	public void init(int w, int h) {
+		num_tiles_w = w;
+		num_tiles_h = h;
 		tileFolder = new GameObject();
 		tileFolder.name = "Board";
 		tiles = new List<List<Tile>>();
@@ -52,27 +54,8 @@ public class Board : MonoBehaviour {
 		tiles [i][j].transform.position = Camera.main.ScreenToWorldPoint( new Vector3 (x, y, 10) );
 	}
 
-	void Update () {
-		if (Input.GetMouseButtonDown (0)) {
-			int mouseX = (int) Input.mousePosition.x;
-			int mouseY = (int) Input.mousePosition.y;
-			int[] pos = whichTile (mouseX, mouseY);
-			if ((pos [0] >= 0 && pos [0] < num_tiles_h) && (pos [1] >= 0 && pos [1] < num_tiles_w)) {
-				tiles [pos [0]] [pos [1]].rotate ();
-			} else {
-				print ("Click out of range");
-			}
-		}
+	public void rotate(int i, int j){
+		tiles [i] [j].rotate ();
 	}
 
-	int[] whichTile(int x, int y) {
-		int i = (int) System.Math.Floor((double) y / (Screen.height / num_tiles_h));
-		int j = (int) System.Math.Floor((double) x / (Screen.width / num_tiles_w));
-		int[] pos = { i, j };
-		return pos;
-	}
-
-	void OnGUI () {
-
-	}
 }

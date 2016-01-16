@@ -8,9 +8,9 @@ public class GemModel : MonoBehaviour
 	private Gem owner;			// Pointer to the parent object.
 	private Material mat;		// Material for setting/changing texture and color.
 
-	public void init(int gemType, Gem owner) {
+	public void init(Gem owner) {
 		this.owner = owner;
-		this.gemType = gemType;
+		this.gemType = Random.Range(0, 4)+ 1;
 
 		transform.parent = owner.transform;					// Set the model's parent to the gem.
 		transform.localPosition = new Vector3(0,0,0);		// Center the model on the parent.
