@@ -15,6 +15,9 @@ public class Tile : MonoBehaviour {
         var modelObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
         model = modelObject.AddComponent<TileModel>();
         model.init(tileType, this);
+
+		orientation = Quaternion.Euler(0f, 0f, (orientation.eulerAngles.z - (90f*Random.Range(0, 4))) % 360f);
+		transform.localRotation = orientation;
     }
 
 	public void rotate() {
