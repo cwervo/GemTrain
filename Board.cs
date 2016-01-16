@@ -57,7 +57,11 @@ public class Board : MonoBehaviour {
 			int mouseX = (int) Input.mousePosition.x;
 			int mouseY = (int) Input.mousePosition.y;
 			int[] pos = whichTile (mouseX, mouseY);
-			tiles [pos[0]] [pos[1]].rotate ();
+			if ((pos [0] >= 0 && pos [0] < num_tiles_h) && (pos [1] >= 0 && pos [1] < num_tiles_w)) {
+				tiles [pos [0]] [pos [1]].rotate ();
+			} else {
+				print ("Click out of range");
+			}
 		}
 	}
 
