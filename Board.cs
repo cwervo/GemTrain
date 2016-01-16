@@ -61,8 +61,8 @@ public class Board : MonoBehaviour {
 	int[] whichTile(int x, int y) {
 //		x += Screen.width / (num_tiles_w * 2);
 //		y += Screen.height / (num_tiles_h * 2);
-		int i = (int) System.Math.Floor((double) y / (Screen.width / num_tiles_w));
-		int j = (int) System.Math.Floor((double) x / (Screen.height / num_tiles_h));
+		int i = (int) System.Math.Floor((double) y / (Screen.height / num_tiles_h));
+		int j = (int) System.Math.Floor((double) x / (Screen.width / num_tiles_w));
 		print (i + ", " + j);
 		int[] pos = { i, j };
 		return pos;
