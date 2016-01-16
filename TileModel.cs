@@ -6,7 +6,6 @@ public class TileModel : MonoBehaviour {
 	private int tileType;		// 0 for blank; 1 for turn
     private Tile owner;			// Pointer to the parent object.
     private Material mat;		// Material for setting/changing texture and color.
-	private Vector2 direction;
 
 	public void init(int tileType, Tile owner) {
         this.owner = owner;

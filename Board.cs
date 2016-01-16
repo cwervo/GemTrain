@@ -42,17 +42,32 @@ public class Board : MonoBehaviour {
 
 		tiles [i].Add (new_tile);
 		int[] pos = { i, j };
-		tiles [i][j].setPos(pos);
+		tiles [i][j].pos = pos;
 		float x = Screen.width / num_tiles_w * (float) j + Screen.width/(num_tiles_w*2);
 		float y = Screen.height / num_tiles_h * (float) i + Screen.height/(num_tiles_h*2);
-		tiles [i] [j].transform.position = Camera.main.ScreenToWorldPoint( new Vector3 (x, y, 10) );
+		tiles [i][j].transform.position = Camera.main.ScreenToWorldPoint( new Vector3 (x, y, 10) );
 	}
 
 	void Update () {
-
+		if (Input.GetMouseButtonDown (0)) {
+			int mouseX = (int) Input.mousePosition.x;
+			int mouseY = (int) Input.mousePosition.y;
+			print(mouseX + ", " + mouseY);
+			int[] pos = whichTile (mouseX, mouseY);
+			tiles [pos[0]] [pos[1]].rotate ();
+		}
 	}
 
-	// Will handle switches
+	int[] whichTile(int x, int y) {
+//		x += Screen.width / (num_tiles_w * 2);
+//		y += Screen.height / (num_tiles_h * 2);
+		int i = (int) System.Math.Floor((double) y / (Screen.width / num_tiles_w));
+		int j = (int) System.Math.Floor((double) x / (Screen.height / num_tiles_h));
+		print (i + ", " + j);
+		int[] pos = { i, j };
+		return pos;
+	}
+
 	void OnGUI () {
 
 	}

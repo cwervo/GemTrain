@@ -3,20 +3,24 @@ using System.Collections;
 
 public class Tile : MonoBehaviour {
 
-    private TileModel model;		// The model object.
-    private int tileType;		// Will determine the color and animation for the model.
-	private int[] pos;
+    private TileModel model;
+    private int tileType;
 
-    // The Start function is good for initializing objects, but doesn't allow you to pass in parameters.
-    // For any initialization that requires input, you'll probably want your own init function.
+	public int[] pos;
+	public Quaternion orientation;
 
 	public void init(int tileType) {
         this.tileType = tileType;
 
-        var modelObject = GameObject.CreatePrimitive(PrimitiveType.Quad);	// Create a quad object for holding the gem texture.
-        model = modelObject.AddComponent<TileModel>();						// Add a gemModel script to control visuals of the gem.
+        var modelObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
+        model = modelObject.AddComponent<TileModel>();
         model.init(tileType, this);
     }
+
+	public void rotate() {
+		orientation = Quaternion.Euler(0f, 0f, (orientation.eulerAngles.z - 90f) % 360f);
+		transform.localRotation = orientation;
+	}
 
 	public int[] getPos() {
 		return pos;
