@@ -1,19 +1,9 @@
-// Tom Wexler
-// Gem class
-
-// This script is attached to an empty object.  It doesn't do much beyond making a quad (a rectangle that can be
-// given a texture), attaching a GemModel script to it, and initializing it.  
-
-// Generally it's a good idea for any core game element to be an empty object with a script controlling 
-// non-graphical features and logic of the object. For example, you might have an enemy class. The associated
-// script would keep track of things like health and attack power, as well as specifying behavior. This object 
-// would contain a child object that we refer to as the model. The model has it's own script and is
-// in charge of visual aspects of this game element such as animation, scaling, lighting, etc. In a more 
-// complicated example, the model might itself be an empty object with many children. E.g. an enemy class might
-// have an object for the body, another for a weapon that can move independently, and another for a health meter.
-// The game element object tells the model object that it wants to attack, or that it took damage, and the model 
-// object updates appropriately. Separating logic and graphics in this way makes things easier to organize and 
-// update. 
+/* Gem.cs
+ * Create a gem's logic
+ * John Burnett, Andres Cuervo, Sage Jenson
+ * Gem Train
+ * 2015-01-17
+ */
 
 using UnityEngine;
 using System.Collections;

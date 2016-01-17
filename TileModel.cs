@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/* TileModel.cs
+ * The tile's visual interface
+ * John Burnett, Andres Cuervo, Sage Jenson
+ * Gem Train
+ * 2015-01-17
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class TileModel : MonoBehaviour {

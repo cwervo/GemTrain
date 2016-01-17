@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/* Tile.cs
+ * The tile's logic
+ * John Burnett, Andres Cuervo, Sage Jenson
+ * Gem Train
+ * 2015-01-17
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class Tile : MonoBehaviour {
@@ -31,5 +38,14 @@ public class Tile : MonoBehaviour {
 
 	public void setPos(int[] new_pos) {
 		pos = new_pos;
+	}
+
+	// Returns orientation:
+	// 0 = 0 degree rotation
+	// 1 = 90 degree rotation
+	// 2 = 180 degree rotation
+	// 3 = 270 degree rotation
+	public int getRot() {
+		return (int)orientation.eulerAngles.z / 90;
 	}
 }

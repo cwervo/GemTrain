@@ -1,5 +1,9 @@
-// Tom Wexler
-// Example program to help you get started with your project.
+/* GemModel.cs
+ * Display a gem
+ * John Burnett, Andres Cuervo, Sage Jenson
+ * Gem Train
+ * 2015-01-17
+ */
 
 using UnityEngine;
 using System.Collections;
@@ -14,6 +18,7 @@ public class GemManager : MonoBehaviour {
 	int num_tiles_h;
 	int[,] gem_field;
 
+	// Custom initialization function
 	public void init(int w, int h){
 		gemFolder = new GameObject();  
 		gemFolder.name = "Gems";		// The name of a game object is visible in the hHerarchy pane.
@@ -23,6 +28,7 @@ public class GemManager : MonoBehaviour {
 		gem_field = new int[num_tiles_h,num_tiles_w];
 	}
 
+	//Add a new gem
 	public void addGem() {
 		GameObject gemObject = new GameObject();			// Create a new empty game object that will hold a gem.
 		Gem gem = gemObject.AddComponent<Gem>();			// Add the Gem.cs script to the object.

@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/* GemModel.cs
+ * Display a gem
+ * John Burnett, Andres Cuervo, Sage Jenson
+ * Gem Train
+ * 2015-01-17
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class GemModel : MonoBehaviour
