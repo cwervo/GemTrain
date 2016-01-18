@@ -11,17 +11,17 @@ using System.Collections.Generic;
 
 public class GemManager : MonoBehaviour {
 	
-	GameObject gemFolder;	// This will be an empty game object used for organizing objects in the Hierarchy pane.
+	GameObject gem_folder;	// This will be an empty game object used for organizing objects in the Hierarchy pane.
 	List<Gem> gems;			// This list will hold the gem objects that are created.
-	int gemType; 			// The next gem type to be created.
-	int num_tiles_w;
-	int num_tiles_h;
 	int[,] gem_field;
+
+	public int num_tiles_w;
+	public int num_tiles_h;
 
 	// Custom initialization function
 	public void init(int w, int h){
-		gemFolder = new GameObject();  
-		gemFolder.name = "Gems";		// The name of a game object is visible in the hHerarchy pane.
+		gem_folder = new GameObject();  
+		gem_folder.name = "Gems";		// The name of a game object is visible in the hHerarchy pane.
 		gems = new List<Gem>();
 		num_tiles_w = w;
 		num_tiles_h = h;
@@ -32,7 +32,7 @@ public class GemManager : MonoBehaviour {
 	public void addGem() {
 		GameObject gemObject = new GameObject();			// Create a new empty game object that will hold a gem.
 		Gem gem = gemObject.AddComponent<Gem>();			// Add the Gem.cs script to the object.
-		gem.transform.parent = gemFolder.transform;			// Set the gem's parent object to be the gem folder.
+		gem.transform.parent = gem_folder.transform;			// Set the gem's parent object to be the gem folder.
 
 		int x, y;
 		do {
@@ -42,7 +42,7 @@ public class GemManager : MonoBehaviour {
 
 		gem_field [y, x] = 1;
 
-		gem.init (x, y, num_tiles_w, num_tiles_h);
+		gem.init (x, y, this);
 
 		gems.Add(gem);										// Add the gem to the Gems list for future access.
 		gem.name = "Gem "+gems.Count;						// Give the gem object a name in the Hierarchy pane.

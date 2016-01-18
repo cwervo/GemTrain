@@ -11,25 +11,25 @@ using System.Collections;
 public class Gem : MonoBehaviour {
 
 	private GemModel model;		// The model object.
-	private int gemType;		// Will determine the color and animation for the model.
+	private int gem_type;		// Will determine the color and animation for the model.
 	int num_tiles_w;
 	int num_tiles_h;
-	int screenX, screenY;
+	int screen_x, screen_y;
 
 	// The Start function is good for initializing objects, but doesn't allow you to pass in parameters.
 	// For any initialization that requires input, you'll probably want your own init function. 
 
-	public void init(int x, int y, int w, int h) {
-		num_tiles_h = h;
-		num_tiles_w = w;
+	public void init(int x, int y, GemManager owner) {
+		num_tiles_w = owner.num_tiles_w;
+		num_tiles_h = owner.num_tiles_h;
 
 		float[] pos = position (x, y);
-		screenX = (int) pos [0];
-		screenY = (int) pos [1];
-		this.transform.position = Camera.main.ScreenToWorldPoint (new Vector3 (screenX, screenY, 9));
+		screen_x = (int) pos [0];
+		screen_y = (int) pos [1];
+		this.transform.position = Camera.main.ScreenToWorldPoint (new Vector3 (screen_x, screen_y, 9));
 
 		var modelObject = GameObject.CreatePrimitive(PrimitiveType.Quad);	// Create a quad object for holding the gem texture.
-		model = modelObject.AddComponent<GemModel>();						// Add a gemModel script to control visuals of the gem.
+		model = modelObject.AddComponent<GemModel>();						// Add a gem_model script to control visuals of the gem.
 		model.init(this);
 	}
 

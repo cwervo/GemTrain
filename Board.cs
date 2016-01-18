@@ -11,12 +11,12 @@ using System.Collections.Generic;
 
 public class Board : MonoBehaviour {
 
-	GameObject tileFolder;
+	GameObject tile_folder;
 	List<List<Tile>> tiles;
 
 	int num_tiles_h;
 	int num_tiles_w;
-	float prSwitch;
+	float pr_switch;
 
 	/* Custom initialization function 
 	 * w and h are the number of tiles in the board
@@ -24,9 +24,9 @@ public class Board : MonoBehaviour {
 	public void init(int w, int h, float prob) {
 		num_tiles_w = w;
 		num_tiles_h = h;
-		prSwitch = prob;
-		tileFolder = new GameObject();
-		tileFolder.name = "Board";
+		pr_switch = prob;
+		tile_folder = new GameObject();
+		tile_folder.name = "Board";
 		tiles = new List<List<Tile>>();
 		for (int i = 0; i < num_tiles_h; i++) {
 			tiles.Add(new List<Tile>());
@@ -47,14 +47,14 @@ public class Board : MonoBehaviour {
 		}
 	}
 
-	// Create a new tile with a prSwitch probability of being a switch
+	// Create a new tile with a pr_switch probability of being a switch
 	void addTile(int i, int j) {
 		GameObject tileObject = new GameObject();
 		Tile new_tile = tileObject.AddComponent<Tile>();
-		new_tile.transform.parent = tileFolder.transform;
+		new_tile.transform.parent = tile_folder.transform;
 
 		float chance = Random.Range (0f, 1f);
-		if (chance > prSwitch) {
+		if (chance > pr_switch) {
 			new_tile.init (0); // blank tile
 		} else {
 			new_tile.init (1); // turn tile
@@ -72,6 +72,10 @@ public class Board : MonoBehaviour {
 
 	public void rotate(int i, int j){
 		tiles [i] [j].rotate ();
+	}
+
+	public int getTileOrientation(int i, int j){
+		return tiles [i] [j].getRot ();
 	}
 
 }

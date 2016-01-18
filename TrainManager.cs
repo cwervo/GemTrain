@@ -5,46 +5,52 @@ using System.Collections.Generic;
 public class TrainManager : MonoBehaviour {
 
 	GameObject trainFolder;
-	int numTrains = 4;
+	int num_trains;
 	List<Train> trains;
-	int num_tiles_w;
-	int num_tiles_h;
 	int[,] start_tiles;
-	Vector2[] start_directions;
+	int[] start_directions;
+
+	public int num_tiles_w;
+	public int num_tiles_h;
+	public int n;
+
+	GameManager owner;
 
 	// Use this for initialization
-	public void init (int numTrains, int num_tiles_w, int num_tiles_h) {	
-		this.num_tiles_w = num_tiles_w;
-		this.num_tiles_h = num_tiles_h;
+	public void init (GameManager owner) {	
+		this.owner = owner;
+		this.num_tiles_w = owner.num_tiles_w;
+		this.num_tiles_h = owner.num_tiles_h;
+		this.num_trains = owner.num_trains;
+		this.n = owner.n;
 
 		start_tiles = new int[4,2] {
 			{0, 0},
-			{0, num_tiles_h},
-			{num_tiles_w, 0},
-			{num_tiles_w, num_tiles_h}
+			{0, num_tiles_h - 1},
+			{num_tiles_w - 1, 0},
+			{num_tiles_w - 1, num_tiles_h - 1}
 		};
 
-		start_directions = new Vector2[4] {
-			Vector2.up,
-			Vector2.right,
-			Vector2.down,
-			Vector2.left
-		};
+		// Starting orientations
+		start_directions = new int[4] {0, 1, 2, 3};
 
-		this.numTrains = numTrains;
 		trainFolder = new GameObject ();
 		trainFolder.name = "Trains";
 
-		for (int i = 0; i < numTrains; i++) {
+		for (int i = 0; i < num_trains; i++) {
 			addTrain (i);
 		}
 	}
 
 	void addTrain(int i){
 		GameObject trainObject = new GameObject();
+		trainObject.name = "Train " + i;
 		Train new_train = trainObject.AddComponent<Train> ();
 		new_train.transform.parent = trainFolder.transform;
-		new_train.init (start_tiles[i, 0], start_tiles[i,1], start_directions [i], num_tiles_w, num_tiles_h);
+		new_train.init (start_tiles[i, 0], start_tiles[i,1], start_directions [i], this);
 	}
-	
+
+	public int getTileOrientation(int i, int j){
+		return owner.getTileOrientation (i, j);
+	}
 }

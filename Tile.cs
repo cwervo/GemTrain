@@ -11,17 +11,17 @@ using System.Collections;
 public class Tile : MonoBehaviour {
 
     private TileModel model;
-    private int tileType;
+    private int tile_type;
 
 	public int[] pos;
 	public Quaternion orientation;
 
-	public void init(int tileType) {
-        this.tileType = tileType;
+	public void init(int tile_type) {
+        this.tile_type = tile_type;
 
         var modelObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
         model = modelObject.AddComponent<TileModel>();
-        model.init(tileType, this);
+        model.init(tile_type, this);
 
 		orientation = Quaternion.Euler(0f, 0f, (orientation.eulerAngles.z - (90f*Random.Range(0, 4))) % 360f);
 		transform.localRotation = orientation;
@@ -46,6 +46,10 @@ public class Tile : MonoBehaviour {
 	// 2 = 180 degree rotation
 	// 3 = 270 degree rotation
 	public int getRot() {
-		return (int)orientation.eulerAngles.z / 90;
+		if (0 == tile_type) {
+			return -1;
+		} else  {
+			return (int)orientation.eulerAngles.z / 90;
+		}
 	}
 }

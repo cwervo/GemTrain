@@ -3,6 +3,15 @@
  * John Burnett, Andres Cuervo, Sage Jenson
  * Gem Train
  * 2015-01-17
+ * 
+ * TODO:
+ * -Rotation
+ * -Lock down tiles
+ * -Gem Collection
+ * -Train collisions
+ * -Scoreboard
+ * -Fix horizontal spacing
+ * -Gem regeneration, lifespan
  */
 
 using UnityEngine;
@@ -13,11 +22,13 @@ public class GameManager : MonoBehaviour {
 	Board board;
 	GemManager gems;
 	TrainManager trains;
-	int num_tiles_h = 10;
-	int num_tiles_w = 18;
 	float prSwitch = .1f;
 
-	int numGems = 50;
+	public int num_tiles_h = 10;
+	public int num_tiles_w = 18;
+	public int num_gems = 50;
+	public int num_trains = 4;
+	public int n = 10;
 
 	// Use this for initialization
 	void Start () {
@@ -29,7 +40,7 @@ public class GameManager : MonoBehaviour {
 		makeGems ();
 
 		trains = gameObject.AddComponent<TrainManager>();
-		trains.init (4, num_tiles_w, num_tiles_h);
+		trains.init (this);
 	}
 
 	// Run every frame
@@ -61,8 +72,12 @@ public class GameManager : MonoBehaviour {
 
 	// Splay ye's gems 'cross thoust's turbid board
 	void makeGems(){
-		for (int i = 0; i < numGems; i++) {
+		for (int i = 0; i < num_gems; i++) {
 			gems.addGem ();
 		}
+	}
+
+	public int getTileOrientation(int i, int j){
+		return board.getTileOrientation (i, j);
 	}
 }
