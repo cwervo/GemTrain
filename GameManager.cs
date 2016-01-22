@@ -5,12 +5,12 @@
  * 2015-01-17
  * 
  * TODO:
- * -Rotation
+ * -Movement
  * -Lock down tiles
- * -Gem Collection
+ * -Gem collection
  * -Train collisions
  * -Scoreboard
- * -Fix horizontal spacing
+ X -Fix horizontal spacing
  * -Gem regeneration, lifespan
  */
 
@@ -19,21 +19,23 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-	Board board;
+	public Board board;
 	GemManager gems;
 	TrainManager trains;
-	float prSwitch = .1f;
+	float pr_switch = .1f;
 
 	public int num_tiles_h = 10;
-	public int num_tiles_w = 18;
+	public int num_tiles_w = 10;
 	public int num_gems = 50;
-	public int num_trains = 4;
-	public int n = 10;
+	public int num_trains = 1; // num_trains = [0..4]
+	public int n = 200; // maximum of t
+	public int t = 0;  // time step
 
 	// Use this for initialization
 	void Start () {
+//		Screen.SetResolution (500, 500, true); // for John's weird screen
 		board = gameObject.AddComponent<Board>();
-		board.init (num_tiles_w, num_tiles_h, prSwitch);
+		board.init (num_tiles_w, num_tiles_h, pr_switch);
 
 		gems = gameObject.AddComponent<GemManager>();
 		gems.init (num_tiles_w, num_tiles_h);
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour {
 	// Run every frame
 	void Update () {
 		interaction ();
+		t = (t + 1) % n;
 	}
 
 	// Check if the player is rotating a switch

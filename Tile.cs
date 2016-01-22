@@ -19,7 +19,7 @@ public class Tile : MonoBehaviour {
 	public void init(int tile_type) {
         this.tile_type = tile_type;
 
-        var modelObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
+       	GameObject modelObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
         model = modelObject.AddComponent<TileModel>();
         model.init(tile_type, this);
 

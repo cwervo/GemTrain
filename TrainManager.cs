@@ -14,7 +14,7 @@ public class TrainManager : MonoBehaviour {
 	public int num_tiles_h;
 	public int n;
 
-	GameManager owner;
+	public GameManager owner;
 
 	// Use this for initialization
 	public void init (GameManager owner) {	
@@ -25,7 +25,7 @@ public class TrainManager : MonoBehaviour {
 		this.n = owner.n;
 
 		start_tiles = new int[4,2] {
-			{0, 0},
+			{8, 8},
 			{0, num_tiles_h - 1},
 			{num_tiles_w - 1, 0},
 			{num_tiles_w - 1, num_tiles_h - 1}

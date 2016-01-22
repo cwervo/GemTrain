@@ -12,7 +12,7 @@ using System.Collections.Generic;
 public class Board : MonoBehaviour {
 
 	GameObject tile_folder;
-	List<List<Tile>> tiles;
+	public List<List<Tile>> tiles;
 
 	int num_tiles_h;
 	int num_tiles_w;
