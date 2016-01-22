@@ -66,11 +66,11 @@ public class Train : MonoBehaviour {
 	}
 
 	void Update() {
-		transform.localPosition += transform.up * 1 * Time.deltaTime;
-		transform.localPosition = new Vector3 (
-			transform.position.x % Screen.width, 
-			transform.position.y % Screen.height, 
-			8);
+		transform.position += transform.up * 1 * Time.deltaTime;
+//		transform.position = new Vector3 (
+//			transform.position.x % Screen.width, 
+//			transform.position.y % Screen.height, 
+//			8);
 		// update current tile
 		int[] tile_pos = whichTile(this.transform.position);
 		print (tile_pos [0] + ", " + tile_pos [1]);
