@@ -15,6 +15,7 @@ public class Gem : MonoBehaviour {
 	int num_tiles_w;
 	int num_tiles_h;
 	int screen_x, screen_y;
+	int[] coordinants;
 
 	// The Start function is good for initializing objects, but doesn't allow you to pass in parameters.
 	// For any initialization that requires input, you'll probably want your own init function. 
@@ -23,6 +24,7 @@ public class Gem : MonoBehaviour {
 		num_tiles_w = owner.num_tiles_w;
 		num_tiles_h = owner.num_tiles_h;
 
+		coordinants = new int[] {x, y};
 		float[] pos = position (x, y);
 		screen_x = (int) pos [0];
 		screen_y = (int) pos [1];
@@ -39,5 +41,11 @@ public class Gem : MonoBehaviour {
 		float[] returnMe  =  {x, y};
 		return returnMe;
 	}
+
+	public int[] getCoordinants(){
+		return coordinants;
+	}
+
+
 }
 

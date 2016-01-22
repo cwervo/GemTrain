@@ -12,7 +12,7 @@ using System.Collections.Generic;
 public class GemManager : MonoBehaviour {
 	
 	GameObject gem_folder;	// This will be an empty game object used for organizing objects in the Hierarchy pane.
-	List<Gem> gems;			// This list will hold the gem objects that are created.
+	public List<Gem> gems;	// This list will hold the gem objects that are created.
 	int[,] gem_field;
 
 	public int num_tiles_w;
@@ -21,7 +21,7 @@ public class GemManager : MonoBehaviour {
 	// Custom initialization function
 	public void init(int w, int h){
 		gem_folder = new GameObject();  
-		gem_folder.name = "Gems";		// The name of a game object is visible in the hHerarchy pane.
+		gem_folder.name = "Gems";		// The name of a game object is visible in the hierarchy pane.
 		gems = new List<Gem>();
 		num_tiles_w = w;
 		num_tiles_h = h;
@@ -46,6 +46,10 @@ public class GemManager : MonoBehaviour {
 
 		gems.Add(gem);										// Add the gem to the Gems list for future access.
 		gem.name = "Gem "+gems.Count;						// Give the gem object a name in the Hierarchy pane.
+	}
+
+	public void removeGem(int[] gem_coords){
+		;
 	}
 
 }
