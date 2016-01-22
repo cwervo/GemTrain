@@ -6,7 +6,7 @@ public class TrainManager : MonoBehaviour {
 
 	GameObject trainFolder;
 	int num_trains;
-	List<Train> trains;
+	public List<Train> trains;
 	int[,] start_tiles;
 	int[] start_directions;
 
@@ -25,14 +25,14 @@ public class TrainManager : MonoBehaviour {
 		this.n = owner.n;
 
 		start_tiles = new int[4,2] {
-			{8, 8},
-			{0, num_tiles_h - 1},
-			{num_tiles_w - 1, 0},
-			{num_tiles_w - 1, num_tiles_h - 1}
+			{0, 0},
+			{num_tiles_h - 1, 0},
+			{0, num_tiles_w - 1},
+			{num_tiles_h - 1, num_tiles_w - 1}
 		};
 
 		// Starting orientations
-		start_directions = new int[4] {0, 1, 2, 3};
+		start_directions = new int[4] {0, 1, 3, 2};
 
 		trainFolder = new GameObject ();
 		trainFolder.name = "Trains";
