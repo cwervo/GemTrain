@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
 	public int num_tiles_h = 10;
 	public int num_tiles_w = 10;
 	public int num_gems = 50;
-	public int num_trains = 4; // num_trains = [0..4]
+	public int num_trains = 1; // num_trains = [0..4]
 	public int n = 200; // maximum of t
 	public int t = 0;  // time step
 
