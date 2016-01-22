@@ -16,8 +16,8 @@ public class Train : MonoBehaviour {
 	int orientation;
 	int direction;
 	float tile_width;
-	Vector2 location, base_pos;
-	Tile current_tile;
+	Vector2 location;
+	public Tile current_tile;
 	int t, n;
 
 	TrainManager owner;
@@ -29,13 +29,17 @@ public class Train : MonoBehaviour {
 		this.num_tiles_w = owner.num_tiles_w;
 		this.num_tiles_h = owner.num_tiles_h;
 		this.n = owner.owner.n;
+		this.direction = start_dir;
 		tile_width = Screen.width / num_tiles_w;
-		base_pos = new Vector2 ();
+
+		this.transform.rotation = Quaternion.Euler(0f, 0f, (90f * direction)%360f);
+		this.transform.Rotate (Vector2.right * direction);
 
 		float[] pos = position (i, j);
 		location = new Vector2 (pos [0], pos [1]);
+		current_tile = owner.owner.board.tiles [i] [j];
 		this.transform.position = Camera.main.ScreenToWorldPoint (
-			new Vector3 (location.x, location.y - Screen.height/(num_tiles_h*2), 8));
+			new Vector3 (location.x, location.y, 8));
 
 		GameObject modelObject = GameObject.CreatePrimitive(PrimitiveType.Quad);	// Create a quad object for holding the gem texture.
 		model = modelObject.AddComponent<TrainModel>();						// Add a gemModel script to control visuals of the gem.
@@ -54,65 +58,25 @@ public class Train : MonoBehaviour {
 	}
 
 	int[] whichTile(Vector2 loc) {
+		loc = Camera.main.WorldToScreenPoint (loc);
 		int i = (int) System.Math.Floor((double) loc.y / (Screen.height / num_tiles_h));
 		int j = (int) System.Math.Floor((double) loc.x / (Screen.width / num_tiles_w));
 		int[] pos = { i, j };
 		return pos;
 	}
 
-	public Vector2 straight() {
-		return (new Vector2 (0, t / (n * tile_width)));
-	}
-
-	public Vector2 left() {
-		return (new Vector2 (tile_width * (Mathf.Cos(t) - 1), tile_width * (Mathf.Sin(t))));
-	}
-
-	public Vector2 right() {
-		return (new Vector2 (-1 * (tile_width * (Mathf.Cos(t) - 1)), tile_width * (Mathf.Sin(t))));
-	}
-
-
-	Vector2 offset(int tile_orientation){
-		Vector2 offset;
-		if (0 == tile_orientation) {
-			offset = right ();
-		} else if (1 == tile_orientation) {
-			offset = left ();
-		} else {
-			offset = straight ();
-		}
-
-		//TODO: rotate around the center of the tile based on the train's orientation
-		return offset;
-	}
-
-	void updateLocation(){
-		this.transform.position = Camera.main.ScreenToWorldPoint (
-			new Vector3(location.x, location.y, 8));
-	}
-
 	void Update() {
-		t = owner.owner.t;
-		if (t == 0) {
-			base_pos = location;
-		}
-
-		// get orientation of underlying tile
-		int[] tile = whichTile(location);
-		print (tile[0] + ", " + tile[1]);
-		current_tile = owner.owner.board.tiles[tile[0]][tile[1]];
+		transform.localPosition += transform.up * 1 * Time.deltaTime;
+		transform.localPosition = new Vector3 (
+			transform.position.x % Screen.width, 
+			transform.position.y % Screen.height, 
+			8);
+		// update current tile
+		int[] tile_pos = whichTile(this.transform.position);
+		print (tile_pos [0] + ", " + tile_pos [1]);
+		current_tile = owner.owner.board.tiles [tile_pos [0]] [tile_pos [1]];
 		int tile_orientation = current_tile.getRot();
-
-		// call turn() to figure out where 2 go
-		int dir = turn(tile_orientation);
-
-		location = base_pos + offset (dir);
-		this.transform.RotateAround (
-			location,
-			Camera.main.WorldToScreenPoint(current_tile.transform.position), 
-			orientation * 90);
-		updateLocation ();
+		this.transform.rotation = Quaternion.Euler(0f, 0f, (90f * tile_orientation)%360f);
 	}
 
 
